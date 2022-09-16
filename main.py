@@ -8,8 +8,8 @@ import random
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
-wedding_date = "2022-10-05"
-marriage_date = "09-25"
+wedding_date = os.environ['WEDDING_DATE']
+marriage_date = os.environ['MARRIAGE_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
 
