@@ -24,7 +24,8 @@ def get_weather():
     url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
     res = requests.get(url).json()
     weather = res['data']['list'][0]
-    return weather['weather'], math.floor(weather['temp'])
+
+    return weather['weather'], math.floor(weather['temp']), weather["airQuality"]
 
 
 def get_count():
@@ -45,7 +46,7 @@ def get_marriage():
                              "-" + marriage_date, "%Y-%m-%d")
     if next > datetime.now():
         return "距离领证还有"+str((next-today).days)+"天"
-    return "距离下个结婚纪念日还有"+str((next.replace(year=next.year + 1)-today).days)+"天"
+    return "距离结婚纪念日还有"+str((next.replace(year=next.year + 1)-today).days)+"天"
 
 
 def get_wedding():
@@ -66,13 +67,38 @@ def get_random_color():
     return "#%06x" % random.randint(0, 0xFFFFFF)
 
 
+def get_today():
+    Y = today.strftime('%Y-%m-%d')
+
+    W = int(today.strftime('%w'))
+
+    return "今天是"+Y+" "+"星期"+get_week_day(W)
+
+
+def get_week_day(date):
+    week_day_dict = {
+        0: '星期一',
+        1: '星期二',
+        2: '星期三',
+        3: '星期四',
+        4: '星期五',
+        5: '星期六',
+        6: '星期天',
+    }
+
+    return week_day_dict[date]
+
+
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-wea, temperature = get_weather()
+wea, temperature, airQuality = get_weather()
+Y, M, D, W = today.strftime('%Y, %m %d %w')
 
 data = {"weather": {"value": wea, "color": get_random_color()},
+        "today": {"value": get_today(), "color": get_random_color()},
         "temperature": {"value": temperature, "color": get_random_color()},
+        "airQuality": {"value": airQuality, "color": get_random_color()},
         "love_days": {"value": get_count(), "color": get_random_color()},
         "birthday_left": {"value": get_birthday(), "color": get_random_color()},
         "wedding_left": {"value": get_wedding(), "color": get_random_color()},
