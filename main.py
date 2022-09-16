@@ -93,7 +93,7 @@ client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature, airQuality = get_weather()
-Y, M, D, W = today.strftime('%Y, %m %d %w')
+
 
 data = {"weather": {"value": wea, "color": get_random_color()},
         "today": {"value": get_today(), "color": get_random_color()},
