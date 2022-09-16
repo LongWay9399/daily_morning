@@ -44,15 +44,15 @@ def get_marriage():
     next = datetime.strptime(str(date.today().year) +
                              "-" + marriage_date, "%Y-%m-%d")
     if next > datetime.now():
-        return "距离领证还有"+(today-next).days+"天"
-    return "距离下个结婚纪念日还有"+(next.replace(year=next.year + 1)-today).days+"天"
+        return "距离领证还有"+str((today-next).days)+"天"
+    return "距离下个结婚纪念日还有"+str((next.replace(year=next.year + 1)-today).days)+"天"
 
 
 def get_wedding():
     delta = datetime.strptime(wedding_date, "%Y-%m-%d")
     if delta > datetime.now():
         return ""
-    return "距离举行婚礼还有"+(today-delta).days+"天"
+    return "距离举行婚礼还有"+str((today-delta).days)+"天"
 
 
 def get_words():
