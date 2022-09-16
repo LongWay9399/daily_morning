@@ -72,18 +72,18 @@ def get_today():
 
     W = int(today.strftime('%w'))
 
-    return "今天是"+Y+" "+"星期"+get_week_day(W)
+    return "今天是"+Y+" "+get_week_day(W)
 
 
 def get_week_day(date):
     week_day_dict = {
-        0: '星期一',
-        1: '星期二',
-        2: '星期三',
-        3: '星期四',
-        4: '星期五',
-        5: '星期六',
-        6: '星期天',
+        1: '星期一',
+        2: '星期二',
+        3: '星期三',
+        4: '星期四',
+        5: '星期五',
+        6: '星期六',
+        0: '星期天',
     }
 
     return week_day_dict[date]
